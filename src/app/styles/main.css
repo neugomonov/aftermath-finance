@@ -1,0 +1,599 @@
+@import "./tokens.css";
+@import "./themes.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    border-color: var(--border-card);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    position: relative;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #5eead4 0%, #2dd4bf 100%);
+    color: #0f172a;
+    border: none;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(144, 252, 211, 0.4),
+      0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .btn-primary::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #2dd4bf 0%, #14b8a6 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .btn-primary:hover::before {
+    opacity: 1;
+  }
+
+  @media (min-width: 640px) {
+    .btn-primary {
+      padding: 0.875rem 2rem;
+      border-radius: 1rem;
+      font-size: 1rem;
+    }
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(144, 252, 211, 0.5),
+      0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-primary:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(144, 252, 211, 0.4);
+  }
+
+  .btn-primary:disabled {
+    background: var(--bg-input) !important;
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none !important;
+  }
+
+  .btn-primary:disabled::before {
+    display: none;
+  }
+
+  .btn-primary > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-secondary {
+    position: relative;
+    padding: 0.5rem 0.75rem;
+    background: linear-gradient(
+      135deg,
+      rgba(144, 252, 211, 0.15),
+      rgba(94, 234, 212, 0.15)
+    );
+    color: var(--text-primary);
+    border: 2px solid rgba(144, 252, 211, 0.3);
+    border-radius: 0.5rem;
+    font-weight: 700;
+    font-size: 0.75rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+  }
+
+  @media (min-width: 640px) {
+    .btn-secondary {
+      padding: 0.625rem 1rem;
+      border-radius: 0.625rem;
+      font-size: 0.8125rem;
+    }
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background: linear-gradient(
+      135deg,
+      rgba(144, 252, 211, 0.25),
+      rgba(94, 234, 212, 0.25)
+    );
+    border-color: rgba(144, 252, 211, 0.5);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(144, 252, 211, 0.3);
+  }
+
+  .btn-secondary:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+
+  .btn-secondary:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .connect-button-wrapper {
+    position: relative;
+  }
+
+  .connect-button-wrapper::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 1.125rem;
+    background: linear-gradient(
+      135deg,
+      rgba(94, 234, 212, 0.4),
+      rgba(144, 252, 211, 0.4)
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    filter: blur(8px);
+  }
+
+  .connect-button-wrapper:hover::before {
+    opacity: 1;
+  }
+
+  .connect-button-wrapper button,
+  [data-dapp-kit] > div > button,
+  [data-dapp-kit] > button,
+  .connect-wallet-btn {
+    position: relative !important;
+    width: 100% !important;
+    padding: 0.875rem 1.75rem !important;
+    background: linear-gradient(135deg, #5eead4 0%, #2dd4bf 100%) !important;
+    color: #0f172a !important;
+    border: none !important;
+    border-radius: 0.875rem !important;
+    font-weight: 700 !important;
+    font-size: 0.9375rem !important;
+    letter-spacing: 0.01em !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 4px 16px rgba(144, 252, 211, 0.35),
+      0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    cursor: pointer !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+  }
+
+  .connect-button-wrapper button::before,
+  [data-dapp-kit] > div > button::before,
+  [data-dapp-kit] > button::before,
+  .connect-wallet-btn::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(135deg, #2dd4bf 0%, #14b8a6 100%) !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s ease !important;
+    z-index: 0 !important;
+  }
+
+  .connect-button-wrapper button::after,
+  [data-dapp-kit] > div > button::after,
+  [data-dapp-kit] > button::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    ) !important;
+    transition: left 0.5s ease !important;
+    z-index: 1 !important;
+  }
+
+  .connect-button-wrapper button:hover::after,
+  [data-dapp-kit] > div > button:hover::after,
+  [data-dapp-kit] > button:hover::after {
+    left: 100% !important;
+  }
+
+  .connect-button-wrapper button:hover::before,
+  [data-dapp-kit] > div > button:hover::before,
+  [data-dapp-kit] > button:hover::before,
+  .connect-wallet-btn:hover::before {
+    opacity: 1 !important;
+  }
+
+  .connect-button-wrapper button > *,
+  [data-dapp-kit] > div > button > *,
+  [data-dapp-kit] > button > *,
+  .connect-wallet-btn > * {
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  @media (min-width: 640px) {
+    .connect-button-wrapper button,
+    [data-dapp-kit] > div > button,
+    [data-dapp-kit] > button,
+    .connect-wallet-btn {
+      padding: 1rem 2.25rem !important;
+      border-radius: 1rem !important;
+      font-size: 1.0625rem !important;
+    }
+  }
+
+  .connect-button-wrapper button:hover,
+  [data-dapp-kit] > div > button:hover,
+  [data-dapp-kit] > button:hover,
+  .connect-wallet-btn:hover {
+    transform: translateY(-3px) scale(1.02) !important;
+    box-shadow: 0 12px 28px rgba(144, 252, 211, 0.45),
+      0 6px 12px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  }
+
+  .connect-button-wrapper button:active,
+  [data-dapp-kit] > div > button:active,
+  [data-dapp-kit] > button:active,
+  .connect-wallet-btn:active {
+    transform: translateY(-1px) scale(0.99) !important;
+    box-shadow: 0 4px 12px rgba(144, 252, 211, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  }
+
+  .connect-button-wrapper button[aria-expanded="true"],
+  [data-dapp-kit] > div > button[aria-expanded="true"],
+  [data-dapp-kit] > button[aria-expanded="true"] {
+    background: linear-gradient(
+      135deg,
+      rgba(16, 185, 129, 0.15),
+      rgba(5, 150, 105, 0.15)
+    ) !important;
+    border: 2px solid rgba(16, 185, 129, 0.5) !important;
+    color: var(--text-primary) !important;
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35),
+      0 0 24px rgba(16, 185, 129, 0.15) !important;
+  }
+
+  .connect-button-wrapper button svg path,
+  [data-dapp-kit] > div > button svg path,
+  [data-dapp-kit] > button svg path {
+    stroke: #000000 !important;
+    color: #000000 !important;
+  }
+
+  .connect-button-wrapper button[aria-expanded="true"]:hover,
+  [data-dapp-kit] > div > button[aria-expanded="true"]:hover,
+  [data-dapp-kit] > button[aria-expanded="true"]:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(16, 185, 129, 0.25),
+      rgba(5, 150, 105, 0.25)
+    ) !important;
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.45),
+      0 0 32px rgba(16, 185, 129, 0.2) !important;
+    border-color: rgba(16, 185, 129, 0.6) !important;
+  }
+
+  .connect-button-wrapper button[aria-expanded="true"]::before {
+    display: none !important;
+  }
+
+  .input-field {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--bg-input);
+    backdrop-filter: blur(8px);
+    border: 2px solid var(--border-input);
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-sizing: border-box;
+  }
+
+  @media (min-width: 640px) {
+    .input-field {
+      padding: 0.875rem 1.25rem;
+      border-radius: 1rem;
+      font-size: 1rem;
+    }
+  }
+
+  .input-field::placeholder {
+    color: var(--text-muted);
+  }
+
+  .input-field input {
+    color: var(--text-primary);
+  }
+
+  .input-field input::placeholder {
+    color: var(--text-muted);
+  }
+
+  .input-field:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    background: var(--bg-input);
+    box-shadow: 0 0 0 4px rgba(144, 252, 211, 0.1),
+      0 4px 12px rgba(144, 252, 211, 0.2);
+    transform: translateY(-1px);
+  }
+
+  .card {
+    background: var(--bg-card);
+    backdrop-filter: blur(32px);
+    border-radius: 1.25rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+    border: 2px solid var(--border-card);
+    padding: 1.25rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card:hover {
+    background: var(--bg-card-hover);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 6px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  @media (min-width: 640px) {
+    .card {
+      border-radius: 1.5rem;
+      padding: 2rem;
+    }
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(24px);
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-2xl);
+    padding: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .glass-card {
+      border-radius: 1rem;
+      padding: 1.5rem;
+    }
+  }
+
+  .gradient-text {
+    background: linear-gradient(to right, #5eead4, #2dd4bf, #14b8a6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 700;
+  }
+
+  .neon-glow {
+    box-shadow: var(--shadow-neon-teal);
+  }
+
+  .neon-glow-cyan {
+    box-shadow: var(--shadow-neon-cyan);
+  }
+
+  .neon-glow-green {
+    box-shadow: var(--shadow-neon-green);
+  }
+
+  .status-card-success {
+    background: linear-gradient(
+      to right,
+      rgba(16, 185, 129, 0.1),
+      rgba(5, 150, 105, 0.1)
+    );
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 0.5rem;
+    backdrop-filter: blur(4px);
+    padding: 0.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .status-card-success {
+      border-radius: 0.75rem;
+      padding: 1rem;
+    }
+  }
+
+  .status-card-warning {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    border-radius: 0.5rem;
+    backdrop-filter: blur(4px);
+    padding: 0.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .status-card-warning {
+      border-radius: 0.75rem;
+      padding: 1rem;
+    }
+  }
+
+  .status-card-info {
+    background: rgba(94, 234, 212, 0.1);
+    border: 1px solid rgba(94, 234, 212, 0.3);
+    border-radius: 0.5rem;
+    backdrop-filter: blur(4px);
+    padding: 0.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .status-card-info {
+      border-radius: 0.75rem;
+      padding: 1rem;
+    }
+  }
+
+  .container-main {
+    max-width: 64rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-main {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-main {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  .text-responsive-xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  @media (min-width: 640px) {
+    .text-responsive-xl {
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .text-responsive-xl {
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+    }
+  }
+
+  .text-responsive-lg {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .text-responsive-lg {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .text-responsive-lg {
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+    }
+  }
+
+  .text-responsive-base {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .text-responsive-base {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+  }
+
+  .theme-indicator {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    background: var(--bg-card);
+    border: 2px solid var(--border-card);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .theme-indicator.show {
+    opacity: 1;
+  }
+
+  @media (min-width: 640px) {
+    .theme-indicator {
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 0.875rem;
+    }
+  }
+
+  .app-container {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .app-content {
+    position: relative;
+    z-index: 10;
+  }
+
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .gap-app {
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .gap-app {
+      gap: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .gap-app {
+      gap: 2.5rem;
+    }
+  }
+}
